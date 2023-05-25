@@ -95,6 +95,6 @@ print("=" * 30)
 print(f"#   Total Review : {total_review}")
 print(f"#   Empty Review : {empty_count}")
 if len(empty_list) > 0 :
-    print(f"       +{empty_list}")
+    print(f"       -{empty_list}")
 print(f"#   Reviews collected : {total_review - empty_count}")
 print("=" * 30)
