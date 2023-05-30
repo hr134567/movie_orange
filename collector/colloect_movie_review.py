@@ -8,13 +8,13 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-
+from db.movie_crud import add_review
 
 # Selenium : 동적 페이지에서 웹 크롤링 가능!
 #  → 원래 용도 : 웹 브라우저 테스트용도
 
 # http : 웹
-# ftp : 파일 전송
+# ftp : 파일
 # ssh : 터미널 접속
 #smtp : 메일 전송
 
@@ -88,6 +88,16 @@ for i, review_box in enumerate(review_list) :
     print(f" - 날짜 : {review_date}")
     print(f" - 내용 : {review}")
 
+    # MongoDB 저장
+    # - JSON type(Dict type) 전달
+    data = {
+        "title" : title,
+        "review" : review,
+        "score" : score,
+        "writer" : writer,
+        "regdate" : review_date
+    }
+    add_review(data)
 # Report
 print("=" * 30)
 print(f"#   MOVIE TITLE : {title}")
@@ -98,3 +108,4 @@ if len(empty_list) > 0 :
     print(f"       -{empty_list}")
 print(f"#   Reviews collected : {total_review - empty_count}")
 print("=" * 30)
+
